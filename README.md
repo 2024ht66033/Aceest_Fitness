@@ -1,92 +1,81 @@
-# 🏋️ ACEest Fitness – Flask Web Application
-
-This project is a web-based fitness tracker for managing personal workouts. It was developed as part of a DevOps assignment to demonstrate best practices in version control, unit testing, Docker containerization, and CI/CD automation using GitHub Actions.
-
----
-
-## 📁 Project Structure
-
-Aceest_Fitness/
-├── flask_app.py # Main Flask application
-├── test_app.py # Pytest unit tests
-├── requirements.txt # Python dependencies
-├── Dockerfile # Docker configuration
-├── .github/
-│ └── workflows/
-│ └── main.yml # GitHub Actions CI/CD pipeline
-└── README.md # Project documentation
+# ACEest Fitness 🏋️‍♂️
+A Flask-based fitness and gym management system demonstrating a complete DevOps CI/CD pipeline — including version control, testing, containerization, and automated deployment using Jenkins, Docker, and Kubernetes.
 
 ---
 
-## ⚙️ Technologies Used
-
-- Python 3.9+
-- Flask
-- Pytest
-- Docker
-- Git & GitHub
-- GitHub Actions
+## 🚀 Project Overview
+The **ACEest Fitness** web application provides a foundation for managing gym operations — including member registration, workout plans, attendance tracking, and trainer management.  
+It follows a modular, version-controlled development approach integrating automation and modern DevOps practices.
 
 ---
 
-## 🚀 How to Run the Application Locally
+## 🧩 Core Components
+| Component | Description |
+|------------|-------------|
+| **Flask App** | Core Python web app (`ACEest_Fitness.py`) implementing backend routes and logic |
+| **Versioning** | Incremental version files (e.g., `ACEest_Fitness-V1.1.py`, `V1.2.3.py`, etc.) following semantic versioning |
+| **Unit Testing** | Pytest-based test suite verifying all key functionalities |
+| **Jenkins Pipeline** | Automated CI/CD pipeline with build, test, SonarQube, and Docker integration |
+| **Dockerfile** | Builds container images for deployment |
+| **Kubernetes Manifests** | YAML files for deployment, service, and ingress configuration |
+| **SonarQube** | Static code analysis and quality gates |
+| **GitHub Repository** | Central VCS with branching, tagging, and automated triggers |
 
-### 🧰 Prerequisites
+---
 
-- Python installed (`python --version`)
-- `pip` for installing packages
+## 🧪 Features Implemented
+- Flask modular architecture with version-controlled updates
+- Automated unit testing using **Pytest**
+- Continuous Integration via **Jenkins**
+- Continuous Delivery/Deployment on **Kubernetes (Minikube / Cloud)**
+- Containerization with **Docker & Podman**
+- Deployment strategies:
+  - Blue-Green Deployment  
+  - Canary Release  
+  - Shadow Deployment  
+  - A/B Testing  
+  - Rolling Update
+- Code quality validation using **SonarQube**
+- Versioned container images on **Docker Hub**
 
-### ▶️ Steps to Run
+---
 
+## 🧰 Tools and Technologies
+| Category | Tools Used |
+|-----------|-------------|
+| Programming | Python, Flask |
+| Version Control | Git, GitHub |
+| CI/CD | Jenkins |
+| Testing | Pytest |
+| Containerization | Docker, Podman |
+| Orchestration | Kubernetes, Minikube |
+| Code Quality | SonarQube |
+| Cloud (optional) | AWS / Azure / GCP |
+
+---
+
+## ⚙️ CI/CD Pipeline Workflow
+1. Developer commits and pushes code to GitHub.
+2. Jenkins automatically triggers a build pipeline:
+   - Clones the repo  
+   - Installs dependencies  
+   - Runs Pytest test cases  
+   - Performs SonarQube analysis  
+   - Builds Docker image and tags version  
+   - Pushes Docker image to Docker Hub  
+   - Deploys latest image to Kubernetes cluster
+3. Kubernetes deploys the new pod version following the selected deployment strategy.
+
+---
+
+## 🐳 Docker Commands
 ```bash
-# Clone the repository
-git clone https://github.com/2024ht66033/Aceest_Fitness.git
-cd Aceest_Fitness
+# Build Docker Image
+docker build -t aceest_fitness:v1.3 .
 
-# Install dependencies
-pip install -r requirements.txt
+# Run locally
+docker run -p 5000:5000 aceest_fitness:v1.3
 
-# Start the Flask app
-python flask_app.py
-•	The app will run at: http://127.0.0.1:5000
-________________________________________
-📡 API Endpoints
-Method	Endpoint	Description
-POST	/add_workout	Add a workout with duration
-GET	/workouts	View all workouts
-________________________________________
-🧪 Running Unit Tests Locally
-Unit tests are written using Pytest to validate the API functionality.
-📦 Run Tests
-pytest test_app.py
-Expected:
-•	Tests should pass if endpoints work correctly.
-________________________________________
-🐳 Docker Containerization
-🔨 Build Docker Image
-docker build -t aceest_fitness .
-🚀 Run the Container
-docker run -p 5000:5000 aceest_fitness
-Visit the app at: http://localhost:5000
-________________________________________
-🔁 GitHub Actions CI/CD Pipeline
-The project includes an automated CI/CD workflow:
-✅ Trigger
-•	Every git push to the repository
-🔄 What It Does
-•	Sets up Python environment
-•	Installs dependencies
-•	Runs pytest tests
-📁 File
-•	.github/workflows/main.yml
-Check the Actions tab on GitHub for run logs and status.
-________________________________________
-👤 Author
-•	Name: Tanveersingh Champawat
-•	GitHub ID: 2024ht66033
-________________________________________
-📝 License
-For educational and academic purposes only.
-
----
-
+# Push to Docker Hub
+docker tag aceest_fitness:v1.3 your_dockerhub_username/aceest_fitness:v1.3
+docker push your_dockerhub_username/aceest_fitness:v1.3
